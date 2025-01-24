@@ -52,7 +52,7 @@ private _initialRebelEquipment = [
     "CUP_30Rnd_556x45_STANAG", "CUP_HandGrenade_L109A1_HE", "CUP_30Rnd_9x19_MP5",
     "CUP_hgun_TT", "CUP_8Rnd_762x25_TT",
     ["cwr3_launch_m72a3", 50],
-    ["cwr3_b_facewear_balaclava_olive", 10], ["IEDLandSmall_Remote_Mag", 10], ["IEDUrbanBig_Remote_Mag", 3], ["IEDLandBig_Remote_Mag", 3],
+    ["cwr3_b_facewear_balaclava_olive", "CUP_Item_optic_SUSAT", "cwr3_b_uk_backpack", "cwr3_i_bergen_backpack_dpm",
     "cwr3_b_uk_vest_58webbing", "cwr3_b_uk_headgear_mk6_helmet_dpm",
     "cwr3_i_vest_chicom", "cwr3_i_vest_58webbing",
     "cwr3_o_backpack_gasmask", "cwr3_b_uk_vest_58webbing_sapper",
