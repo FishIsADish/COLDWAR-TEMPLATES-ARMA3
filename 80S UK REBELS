@@ -1,1 +1,163 @@
+///////////////////////////
+//   Rebel Information   //
+///////////////////////////
 
+["name", "BRITISH ARMY 80s"] call _fnc_saveToTemplate; 
+
+["flag", "Flag_UK_F"] call _fnc_saveToTemplate;
+["flagTexture", "\A3\Data_F\Flags\flag_uk_co.paa"] call _fnc_saveToTemplate;
+["flagMarkerType", "flag_UK"] call _fnc_saveToTemplate;
+
+["vehiclesBasic", ["cwr3_b_uk_landrover"]] call _fnc_saveToTemplate;
+["vehiclesLightUnarmed", ["cwr3_b_uk_landrover"]] call _fnc_saveToTemplate;
+["vehiclesLightArmed", ["CUP_B_LR_Special_GMG_GB_W", "CUP_B_LR_MG_GB_W"]] call _fnc_saveToTemplate;
+["vehiclesTruck", ["cwr3_b_uk_fv620_transport", "cwr3_b_m939"]] call _fnc_saveToTemplate;
+["vehiclesAT", ["cwr3_b_hmmwv_tow"]] call _fnc_saveToTemplate;
+["vehiclesAA", ["cwr3_b_fia_m163"]] call _fnc_saveToTemplate;
+["vehiclesBoat", ["cwr3_i_zodiac"]] call _fnc_saveToTemplate;
+
+["vehiclesPlane", ["cwr3_b_frs1"]] call _fnc_saveToTemplate;       // replace from civ varient s
+["vehiclesCivPlane", ["CUP_C_AN2_CIV"]] call _fnc_saveToTemplate;
+["vehiclesMedical", ["cwr3_b_uk_landrover_mev"]] call _fnc_saveToTemplate;
+
+
+["vehiclesCivCar", ["CUP_O_Hilux_unarmed_CR_CIV"]] call _fnc_saveToTemplate;
+["vehiclesCivTruck", ["cwr3_c_v3s_blue"]] call _fnc_saveToTemplate;
+["vehiclesCivHeli", ["CUP_C_Mi17_Civilian_RU"]] call _fnc_saveToTemplate;
+["vehiclesCivBoat", ["C_Rubberboat"]] call _fnc_saveToTemplate;
+
+["staticMGs", ["cwr3_b_uk_l111a1_high", "cwr3_b_uk_l111a1_low"]] call _fnc_saveToTemplate;
+["staticAT", ["gm_ge_army_milan_launcher_tripod"]] call _fnc_saveToTemplate;
+["staticAA", ["cwr3_b_uk_javelin_lml"]] call _fnc_saveToTemplate;
+
+["staticMortars", ["CUP_I_2b14_82mm_NAPA"]] call _fnc_saveToTemplate;
+["staticMortarMagHE", "8Rnd_82mm_Mo_shells"] call _fnc_saveToTemplate;
+["staticMortarMagSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;
+["staticMortarMagFlare", "8Rnd_82mm_Mo_Flare_white"] call _fnc_saveToTemplate;
+
+["mineAT", "CUP_MineE_M"] call _fnc_saveToTemplate;
+["mineAPERS", "APERSMine_Range_Mag"] call _fnc_saveToTemplate;
+
+["breachingExplosivesAPC", [["DemoCharge_Remote_Mag", 1]]] call _fnc_saveToTemplate;
+["breachingExplosivesTank", [["SatchelCharge_Remote_Mag", 1], ["DemoCharge_Remote_Mag", 2]]] call _fnc_saveToTemplate;
+
+#include "CWR_Reb_Vehicle_Attributes.sqf"
+
+///////////////////////////
+//  Rebel Starting Gear  //
+///////////////////////////
+
+private _initialRebelEquipment = [
+    "cwr3_arifle_l85a1_susat", "CUP_smg_MP5SD6",
+    "CUP_30Rnd_556x45_STANAG", "CUP_HandGrenade_L109A1_HE", "CUP_30Rnd_9x19_MP5",
+    "CUP_hgun_TT", "CUP_8Rnd_762x25_TT",
+    ["cwr3_launch_m72a3", 50],
+    ["cwr3_b_facewear_balaclava_olive", 10], ["IEDLandSmall_Remote_Mag", 10], ["IEDUrbanBig_Remote_Mag", 3], ["IEDLandBig_Remote_Mag", 3],
+    "cwr3_b_uk_vest_58webbing", "cwr3_b_uk_headgear_mk6_helmet_dpm",
+    "cwr3_i_vest_chicom", "cwr3_i_vest_58webbing",
+    "cwr3_o_backpack_gasmask", "cwr3_b_uk_vest_58webbing_sapper",
+    "Binocular"
+];
+
+if (A3A_hasTFAR) then {_initialRebelEquipment append ["tf_microdagr", "tf_anprc154"]};
+if (A3A_hasTFAR && startWithLongRangeRadio) then {
+    _initialRebelEquipment pushBack "cwr3_b_backpack_radio";
+};
+if (A3A_hasTFARBeta) then {_initialRebelEquipment append ["TFAR_microdagr", "TFAR_anprc154"]};
+if (A3A_hasTFARBeta && startWithLongRangeRadio) then {
+    _initialRebelEquipment pushBack "cwr3_b_backpack_radio";
+};
+
+["initialRebelEquipment", _initialRebelEquipment] call _fnc_saveToTemplate;
+
+private _rebUniforms = [
+    "cwr3_b_uk_uniform_dpm",
+    "cwr3_b_uk_uniform_dpm_rolled"
+];          //Uniforms given to Player Rebels
+
+private _rebUniformsAI = [
+    "cwr3_b_uk_uniform_dpm",
+    "cwr3_b_uk_uniform_dpm_rolled"
+];          //Uniforms given to AI Rebels
+
+["uniforms", _rebUniforms] call _fnc_saveToTemplate;         //These Items get added to the Arsenal
+
+["headgear", [
+    "cwr3_i_headgear_beret_02_black_fia",
+    "cwr3_i_headgear_beret_02_green_fia",
+    "cwr3_i_headgear_beret_01_brown_fia",
+    "cwr3_i_headgear_beret_01_blue_fia"
+    ]] call _fnc_saveToTemplate;          //Headgear used by Rebell Ai until you have Armored Headgear.
+
+/////////////////////
+///  Identities   ///
+/////////////////////
+
+["faces", [
+    "WhiteHead_09", "WhiteHead_08", "WhiteHead_03", "WhiteHead_20", "Barklem", "WhiteHead_12", "AfricanHead_03", "GreekHead_A3_05", "LivonianHead_6", "RussianHead_1", "RussianHead_2", "RussianHead_3" 
+
+]] call _fnc_saveToTemplate;
+["voices", ["male01engb", "male02engb", "male03engb", "male04engb", "male05engb"]] call _fnc_saveToTemplate;
+
+//////////////////////////
+//       Loadouts       //
+//////////////////////////
+private _loadoutData = call _fnc_createLoadoutData;
+_loadoutData set ["maps", ["ItemMap"]];
+_loadoutData set ["watches", ["ItemWatch"]];
+_loadoutData set ["compasses", ["ItemCompass"]];
+_loadoutData set ["binoculars", ["Binocular"]];
+
+_loadoutData set ["uniforms", _rebUniformsAI];
+_loadoutData set ["facewear", ["None","CUP_G_Balaclava_blk","CUP_G_Balaclava_oli","CUP_G_Bandanna_aviator","CUP_G_Bandanna_beast",
+"CUP_G_Bandanna_blk","CUP_G_Bandanna_khk","CUP_G_Bandanna_oli","CUP_G_Bandanna_shades","CUP_G_Shades_Black"
+]];
+
+_loadoutData set ["items_medical_basic", ["BASIC"] call A3A_fnc_itemset_medicalSupplies];
+_loadoutData set ["items_medical_standard", ["STANDARD"] call A3A_fnc_itemset_medicalSupplies];
+_loadoutData set ["items_medical_medic", ["MEDIC"] call A3A_fnc_itemset_medicalSupplies];
+_loadoutData set ["items_miscEssentials", [] call A3A_fnc_itemset_miscEssentials];
+
+////////////////////////
+//  Rebel Unit Types  //
+///////////////////////.
+
+private _squadLeaderTemplate = {
+    ["uniforms"] call _fnc_setUniform;
+    ["facewear"] call _fnc_setFacewear;
+
+    ["maps"] call _fnc_addMap;
+    ["watches"] call _fnc_addWatch;
+    ["compasses"] call _fnc_addCompass;
+    ["binoculars"] call _fnc_addBinoculars;
+};
+
+private _riflemanTemplate = {
+    ["uniforms"] call _fnc_setUniform;
+    ["facewear"] call _fnc_setFacewear;
+
+    ["maps"] call _fnc_addMap;
+    ["watches"] call _fnc_addWatch;
+    ["compasses"] call _fnc_addCompass;
+};
+
+private _prefix = "militia";
+private _unitTypes = [
+    ["Petros", _squadLeaderTemplate],
+    ["SquadLeader", _squadLeaderTemplate],
+    ["Rifleman", _riflemanTemplate],
+    ["staticCrew", _riflemanTemplate],
+    ["Medic", _riflemanTemplate, [["medic", true]]],
+    ["Engineer", _riflemanTemplate, [["engineer", true]]],
+    ["ExplosivesExpert", _riflemanTemplate, [["explosiveSpecialist", true]]],
+    ["Grenadier", _riflemanTemplate],
+    ["LAT", _riflemanTemplate],
+    ["AT", _riflemanTemplate],
+    ["AA", _riflemanTemplate],
+    ["MachineGunner", _riflemanTemplate],
+    ["Marksman", _riflemanTemplate],
+    ["Sniper", _riflemanTemplate],
+    ["Unarmed", _riflemanTemplate]
+];
+
+[_prefix, _unitTypes, _loadoutData] call _fnc_generateAndSaveUnitsToTemplate;
